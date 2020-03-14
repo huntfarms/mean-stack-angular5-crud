@@ -9,7 +9,13 @@ var bodyParser = require('body-parser');
 var book = require('./routes/book');
 var app = express();
 
-mongoose.connect('mongodb://localhost/mean-angular5', { useNewUrlParser: true, useUnifiedTopology: true }, function(error) {
+mongoose.connect('mongodb://vel.pnphcl.com/mean-angular5', { useNewUrlParser: true, useUnifiedTopology: true }, function(error) {
+
+  if (error) {
+    console.error(error);
+    process.exit(1);
+  }
+  console.log('Conneccted to db');
 
   app.use(logger('dev'));
   app.use(bodyParser.json());
@@ -37,7 +43,7 @@ mongoose.connect('mongodb://localhost/mean-angular5', { useNewUrlParser: true, u
     res.status(err.status || 500);
     res.render('error');
   });
-  
-    });
+  console.log('listening');
+});
   
 module.exports = app;
